@@ -1,0 +1,123 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>Profile</h3>
+                        <p class="mb-2">Welcome to Edunet Settings Profile page</p>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs"><a href="#">Settings </a><span><i
+                                class="ri-arrow-right-s-line"></i></span><a href="#">Profile</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="settings-menu">
+                    <li class="active"><a href="{% url 'learning:setting' %}"><i class="ri-arrow-right-s-line"></i>
+                            Utilisateur</a>
+                    </li>
+                    <li class=""><a href="{% url 'learning:setting' %}"><i class="ri-arrow-right-s-line"></i>
+                            Module</a></li>
+                    <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
+                            Affection</a>
+                    </li>
+                    <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
+                            Activity</a>
+                    </li>
+                    <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
+                            Payment
+                            Method</a></li>
+                </ul>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Enregistrement Module</h4>
+                            </div>
+                            <div class="card-body">
+                                <form class="personal-info-valid" action="{% url 'learning:createmodule' %}"
+                                    method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="info-group row">
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label class="form-label">Module
+                                                </label>
+                                            <input name="module" type="text" class="form-control">
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
+                                                class="form-label">Description</label><input name="description" type="text"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
+                                                class="form-label">Montant</label>
+                                            <input name="montant" type="number" class="form-control">
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
+                                            class="form-label">File</label>
+                                        <input name="photo" type="file" class="form-control">
+                                    </div>
+                                    </div>
+                                    <div class="mt-16"><button type="submit" class="btn btn-primary mr-2">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Liste </h4>
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="rtable rtable--5cols rtable--collapse">
+                                    <div class="rtable-row rtable-row--head bg-transparent">
+                                        <div class="rtable-cell topic-cell column-heading text-dark"><strong>Module
+                                                </strong></div>
+                                        <div class="rtable-cell category-cell column-heading text-dark"><strong>
+                                                Montant</strong></div>
+                                        <div class="rtable-cell impression-cell column-heading text-dark"><strong>
+                                                Date</strong></div>
+                                        <div class="rtable-cell earning-cell column-heading text-dark"><strong>
+                                                Action</strong></div>
+                                    </div>
+                                    {% for i in module %}
+                                    <div class="rtable-row">
+                                        <div class="rtable-cell topic-cell">
+                                            <div class="rtable-cell--content title-content d-flex align-items-center">
+                                                <img class="topic-cell-img"
+                                                    src="{{i.photo.url}}" alt=""
+                                                    width="50"><span class="topic-cell-span">{{i.module}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="rtable-cell category-cell">
+                                            <div class="rtable-cell--heading">Monatant</div>
+                                            <div class="rtable-cell--content date-content">{{i.montant}}
+                                            </div>
+                                        </div>
+                                        <div class="rtable-cell impression-cell">
+                                            <div class="rtable-cell--heading">Date</div>
+                                            <div class="rtable-cell--content replay-link-content">{{i.addDayDateAjout}}</div>
+                                        </div>
+                                        <div class="rtable-cell rtable-cell--foot earning-cell">
+                                            <div class="rtable-cell--heading">Action</div>
+                                            <span><i class="ri-wallet-3-fill"></i></span>
+                                            <span><i class="ri-wallet-3-fill"></i></span>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

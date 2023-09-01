@@ -1,0 +1,83 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>My Courses</h3>
+                        <p class="mb-2">Welcome to Edunet My Courses page</p>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs">
+                        <a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a href="#">My
+                            Courses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="row">
+                    {% for i in module %}
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <img src="{{i.photo.url}}" class="img-fluid card-img-top" alt="" />
+                            <div class="card-body courses-details">
+                                <a href="course-details.html">
+                                    <h5>{{i.module}}</h5>
+                                </a>
+                                <p>{{i.description}}</p>
+                                <div class="courses-action">
+                                    <a class="btn btn-primary text-white" href="">Ajouter</a>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#courseReview"
+                                        class="btn btn-light text-dark btn btn-secondary">Reviews</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="right-sidebar">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card transparent">
+                                <div class="card-header">
+                                    <h4 class="card-title">Categorie</h4>
+                                    <a class="d-flex align-items-center" href="create-group.html">Create Group<i
+                                            class="ri-arrow-right-line ms-10"></i></a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="g-discussion-inner row">
+                                        <div class="col-md-6 col-xl-12">
+                                            <div
+                                                class="bg-white py-12 px-12 rounded d-flex mb-20 justify-content-between align-items-center align-items-center shadow-sm">
+                                                <img src="{% static 'assets/images/courses/html5.png'%}" width="50" height="50"
+                                                    class="me-10" />
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">HTML5</h6>
+                                                    <p class="mb-0">Design</p>
+                                                </div>
+                                                <h5 class="text-primary">305K+</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

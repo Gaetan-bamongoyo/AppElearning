@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from edunet-html.vercel.app/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Nov 2022 14:59:15 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edunet - Personal LMS HTML Dashboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png'%}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'assets/vendor/jqvmap/css/jqvmap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/select2/css/select2.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+</head>
+
+<body class="dashboard">
+
+    <div id="preloader">
+        <i>.</i>
+        <i>.</i>
+        <i>.</i>
+    </div>
+
+    <div id="main-wrapper">
+
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="header-content">
+                            <div class="header-left">
+                                <div class="brand-logo"><a class="mini-logo" href="index.html"><img
+                                            src="{% static 'assets/images/logoi.png'%}" alt="" width="40"></a></div>
+                                <div class="search">
+                                    <form action="#">
+                                        <div class="input-group"><input type="text" class="form-control"
+                                                placeholder="Search Here..."><span class="input-group-text px-12"><i
+                                                    class="ri-search-line"></i></span></div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="header-right">
+                                <div class="dark-light-toggle"><span class="dark"><i
+                                            class="ri-moon-line"></i></span><span class="light"><i
+                                            class="ri-sun-line"></i></span></div>
+                                <div class="nav-item dropdown notification dropdown">
+                                    <div data-bs-toggle="dropdown">
+                                        <div class="notify-bell icon-menu"><span><i
+                                                    class="ri-notification-2-line"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown profile_log dropdown">
+                                    <div data-bs-toggle="dropdown">
+                                        <div class="user icon-menu active"><span class="thumb"><img
+                                                    src="{% static 'assets/images/avatar/1.png'%}" alt=""></span></div>
+                                    </div>
+                                    <div tabindex="-1" role="menu" aria-hidden="true"
+                                        class="dropdown-menu dropdown-menu dropdown-menu-right">
+                                        <div class="user-email">
+                                            <div class="user"><span class="thumb"><img
+                                                        src="{% static 'assets/images/avatar/1.png'%}" alt=""></span>
+                                                <div>
+                                                    <h5>Fiaz Abdullah</h5><span>codeefly@gmail.com</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a class="dropdown-item ps-20 pe-20 pt-10 pb-10 d-flex align-items-center border-top  undefined"
+                                            href="profile.html"><span class="fs-18 text-primary me-10"><i
+                                                    class="ri-user-line"></i></span>Profile</a>
+                                        <a class="dropdown-item ps-20 pe-20 pt-10 pb-10 d-flex align-items-center border-top  text-danger"
+                                            href="{% url 'learning:logout' %}"><span class="fs-18 text-primary me-10"><i
+                                                    class="ri-logout-circle-line"></i></span>Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="sidebar">
+            <div class="brand-logo text-center"><a class="mini-logo" href="index.html"><img
+                        src="{% static 'assets/images/logoi.png'%}" alt="" width="30"></a></div>
+            <div class="menu">
+                <ul>
+                    {% if user.is_staff == 1 %}
+                    <li class="undefined"><a href="{% url 'learning:home' %}"><span><i
+                                    class="ri-grid-fill"></i></span><span class="nav-text">Dashboard</span></a></li>
+                    <li class="undefined"><a href=""><span><i class="ri-stack-fill"></i></span><span
+                                class="nav-text">Courses</span></a></li>
+
+                    {% else %}
+                    {% if user.is_superuser == 1 %}
+                    <li class="undefined"><a href="{% url 'learning:home' %}"><span><i
+                                    class="ri-grid-fill"></i></span><span class="nav-text">Dashboard</span></a></li>
+                    <li class="undefined"><a href=""><span><i class="ri-stack-fill"></i></span><span
+                                class="nav-text">Courses</span></a></li>
+                    <li class="undefined"><a href=""><span><i class="ri-wallet-3-fill"></i></span><span
+                                class="nav-text">Mes cours</span></a></li>
+
+                    {% else %}
+                    <li class="undefined"><a href="{% url 'learning:home' %}"><span><i
+                                    class="ri-grid-line"></i></span><span class="nav-text">Dashboard</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:course' %}"><span><i class="ri-stack-line"></i></span><span
+                                class="nav-text">Courses</span></a></li>
+                    <li class="undefined"><a href=""><span><i class="ri-wallet-3-line"></i></span><span
+                                class="nav-text">Mes cours</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:setting' %}"><span><i
+                                    class="ri-settings-3-line"></i></span><span class="nav-text">Setting</span></a></li>
+                    {% endif %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/chartjs/chartjs.js'%}"></script>
+    <script src="{% static 'assets/js/plugins/chartjs-bar-init.js'%}"></script>
+    <script src="{% static 'assets/js/plugins/chartjs-donut.js'%}"></script>
+    <script src="{% static 'assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js'%}"></script>
+    <script src="{% static 'assets/js/plugins/perfect-scrollbar-init.js'%}"></script>
+    <script src="{% static 'assets/vendor/jqvmap/js/jquery.vmap.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/jqvmap/js/jquery.vmap.world.js'%}"></script>
+    <script src="{% static 'assets/js/plugins/jqvmap-init.js'%}"></script>
+    <script src="{% static 'assets/js/scripts.js'%}"></script>
+
+
+</body>
+
+
+<!-- Mirrored from edunet-html.vercel.app/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Nov 2022 14:59:27 GMT -->
+
+</html>

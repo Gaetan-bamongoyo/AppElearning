@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edunet - Personal LMS HTML Dashboard</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicon.png'%}">
+    <!-- Custom Stylesheet -->
+    <link href="{% static 'assets/vendor/jqvmap/css/jqvmap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/select2/css/select2.min.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+</head>
+
+<body class="dashboard">
+
+    <div id="preloader">
+        <i>.</i>
+        <i>.</i>
+        <i>.</i>
+    </div>
+    <div class="authincation section-padding">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-xl-5 col-md-6">
+                    <div class="mini-logo text-center mb-35"><a href="index.html"><img src="{% static 'assets/images/logo.png'%}" alt=""></a>
+                    </div>
+                    <div class="card">
+                        <div class="card-header justify-content-center">
+                            <h4 class="card-title">Connection</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="{% url 'learning:signin'%}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-12 mb-16"><label class="form-label">Username</label><input name="username"
+                                            type="text" class="form-control"></div>
+                                    <div class="col-12 mb-16"><label class="form-label">Mot de passe</label><input
+                                            name="password" type="password" class="form-control"></div>
+                                    <div class="col-6">
+                                        <div class="form-check"><input name="acceptTerms" type="checkbox"
+                                                class="form-check-input " value=""><label
+                                                class="form-check-label">Remember me</label></div>
+                                    </div>
+                                    <div class="col-6 text-end"><a href="#">Forgot Password?</a></div>
+                                </div>
+                                <div class="mt-16 d-grid gap-2"><button type="submit" class="btn btn-primary mr-2">Connecter</button></div>
+                            </form>
+                            <p class="mt-16 mb-0">Don't have an account?<a class="text-primary" href="{% url 'learning:register'%}">Enregistrez-vous</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'assets/js/scripts.js'%}"></script>
+</body>
+
+</html>
