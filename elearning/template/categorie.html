@@ -38,31 +38,20 @@
                     <div class="col-xxl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Personal Information</h4>
+                                <h4 class="card-title">Les categories des formations</h4>
                             </div>
                             <div class="card-body">
-                                <form class="personal-info-valid" action="{% url 'learning:createuser' %}"
+                                <form class="personal-info-valid" action="{% url 'learning:createcategorie' %}"
                                     method="POST">
                                     {% csrf_token %}
                                     <div class="info-group row">
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label class="form-label">Nom
-                                                d'utilisateur</label>
-                                            <input name="username" type="text" class="form-control">
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label class="form-label">Categorie
+                                                </label>
+                                            <input name="categorie" type="text" class="form-control">
                                         </div>
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
-                                                class="form-label">Email</label><input name="email" type="text"
+                                                class="form-label">Description</label><input name="description" type="text"
                                                 class="form-control">
-                                        </div>
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
-                                                class="form-label">Password</label>
-                                            <input name="password" type="password" class="form-control" value="">
-                                        </div>
-                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
-                                                class="form-label">Fonction</label><select name="isstaff"
-                                                class="form-control">
-                                                <option value="1">Enseignant</option>
-                                                <option value="0">Administrateur</option>
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="mt-16"><button type="submit" class="btn btn-primary mr-2">Save</button>
@@ -77,32 +66,26 @@
                             <div class="card-body">
                                 <div class="rtable rtable--5cols rtable--collapse">
                                     <div class="rtable-row rtable-row--head bg-transparent">
-                                        <div class="rtable-cell topic-cell column-heading text-dark"><strong>Nom
-                                                utilisateur</strong></div>
+                                        <div class="rtable-cell topic-cell column-heading text-dark"><strong>
+                                                Categorie</strong></div>
                                         <div class="rtable-cell category-cell column-heading text-dark"><strong>
-                                                Category</strong></div>
-                                        <div class="rtable-cell impression-cell column-heading text-dark"><strong>
-                                                Email</strong></div>
+                                                Description</strong></div>
                                         <div class="rtable-cell earning-cell column-heading text-dark"><strong>
                                                 Action</strong></div>
                                     </div>
-                                    {% for i in user %}
+                                    {% for i in categorie %}
                                     <div class="rtable-row">
                                         <div class="rtable-cell topic-cell">
                                             <div class="rtable-cell--content title-content d-flex align-items-center">
                                                 <img class="topic-cell-img"
                                                     src="{% static 'assets/images/courses/bootstrap.png'%}" alt=""
-                                                    width="50"><span class="topic-cell-span">{{i.username}}</span>
+                                                    width="50"><span class="topic-cell-span">{{i.categorie}}</span>
                                             </div>
                                         </div>
                                         <div class="rtable-cell category-cell">
-                                            <div class="rtable-cell--heading">Category</div>
-                                            <div class="rtable-cell--content date-content">{{i.is_staff}}
+                                            <div class="rtable-cell--heading">Description</div>
+                                            <div class="rtable-cell--content date-content">{{i.description}}
                                             </div>
-                                        </div>
-                                        <div class="rtable-cell impression-cell">
-                                            <div class="rtable-cell--heading">Email</div>
-                                            <div class="rtable-cell--content replay-link-content">{{i.email}}</div>
                                         </div>
                                         <div class="rtable-cell rtable-cell--foot earning-cell">
                                             <div class="rtable-cell--heading">Action</div>

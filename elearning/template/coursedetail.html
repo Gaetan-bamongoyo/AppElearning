@@ -1,0 +1,49 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header border-bottom pb-15">
+                        <h4 class="card-title">Python Bootcamp from Zero to Hero</h4>
+                    </div>
+                    <div class="card-body course-details">
+                        <img src="{{img.url}}" class="img-fluid rounded mb-20" alt="" />
+                        <div class="mb-50">
+                            <h5>Cours Details</h5>
+                            <P>{{detail}}</P>
+                        </div>
+
+                        <h5>A apprendre</h5>
+
+                        <ul class="course-feature mb-50">
+                            {% for i in contenu %}
+                            <li class="mb-15"><i
+                                    class="ri-check-line text-light bg-primary rounded-circle p-2 me-10"></i>
+                                {{i.titre}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Heures</h4>
+                    </div>
+                    <div class="card-body course-details">
+                        <ul class="course-summary">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <span class="item"><i class="ri-book-open-line text-primary me-10"></i>Lectures</span>
+                                <span>30</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

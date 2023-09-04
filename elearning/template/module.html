@@ -23,17 +23,14 @@
                     <li class="active"><a href="{% url 'learning:setting' %}"><i class="ri-arrow-right-s-line"></i>
                             Utilisateur</a>
                     </li>
-                    <li class=""><a href="{% url 'learning:setting' %}"><i class="ri-arrow-right-s-line"></i>
+                    <li class=""><a href="{% url 'learning:module' %}"><i class="ri-arrow-right-s-line"></i>
                             Module</a></li>
                     <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
                             Affection</a>
                     </li>
-                    <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
-                            Activity</a>
+                    <li class=""><a href="{% url 'learning:categorie' %}"><i class="ri-arrow-right-s-line"></i>
+                            Categorie</a>
                     </li>
-                    <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
-                            Payment
-                            Method</a></li>
                 </ul>
             </div>
             <div class="col-md-9">
@@ -49,21 +46,35 @@
                                     {% csrf_token %}
                                     <div class="info-group row">
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label class="form-label">Module
-                                                </label>
+                                            </label>
                                             <input name="module" type="text" class="form-control">
                                         </div>
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
-                                                class="form-label">Description</label><input name="description" type="text"
-                                                class="form-control">
+                                                class="form-label">Description</label><input name="description"
+                                                type="text" class="form-control">
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16">
+                                            <label class="form-label">Detail module</label>
+                                            <textarea name="detailcours" id="" class="form-control" cols="30"
+                                                rows="10"></textarea>
                                         </div>
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
                                                 class="form-label">Montant</label>
                                             <input name="montant" type="number" class="form-control">
                                         </div>
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
-                                            class="form-label">File</label>
-                                        <input name="photo" type="file" class="form-control">
-                                    </div>
+                                                class="form-label">Categorie</label>
+                                            <select name="categorie" class="form-control">
+                                                {% for i in categorie %}
+                                                <option value="{{i.IdCategorie}}">{{i.categorie}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label
+                                                class="form-label">File</label>
+                                            <input name="photo" type="file" class="form-control">
+                                        </div>
+
                                     </div>
                                     <div class="mt-16"><button type="submit" class="btn btn-primary mr-2">Save</button>
                                     </div>
@@ -78,7 +89,7 @@
                                 <div class="rtable rtable--5cols rtable--collapse">
                                     <div class="rtable-row rtable-row--head bg-transparent">
                                         <div class="rtable-cell topic-cell column-heading text-dark"><strong>Module
-                                                </strong></div>
+                                            </strong></div>
                                         <div class="rtable-cell category-cell column-heading text-dark"><strong>
                                                 Montant</strong></div>
                                         <div class="rtable-cell impression-cell column-heading text-dark"><strong>
@@ -90,8 +101,7 @@
                                     <div class="rtable-row">
                                         <div class="rtable-cell topic-cell">
                                             <div class="rtable-cell--content title-content d-flex align-items-center">
-                                                <img class="topic-cell-img"
-                                                    src="{{i.photo.url}}" alt=""
+                                                <img class="topic-cell-img" src="{{i.photo.url}}" alt=""
                                                     width="50"><span class="topic-cell-span">{{i.module}}</span>
                                             </div>
                                         </div>
@@ -102,12 +112,13 @@
                                         </div>
                                         <div class="rtable-cell impression-cell">
                                             <div class="rtable-cell--heading">Date</div>
-                                            <div class="rtable-cell--content replay-link-content">{{i.addDayDateAjout}}</div>
+                                            <div class="rtable-cell--content replay-link-content">{{i.addDayDateAjout}}
+                                            </div>
                                         </div>
                                         <div class="rtable-cell rtable-cell--foot earning-cell">
                                             <div class="rtable-cell--heading">Action</div>
-                                            <span><i class="ri-wallet-3-fill"></i></span>
-                                            <span><i class="ri-wallet-3-fill"></i></span>
+                                            <a class="icon mx-16 my-16 py-8 px-8 rounded-circle bg-primary-lighten"
+                                                href="/contenu/{{i.IdModule}}"><i class="ri-check-line fs-18 text-primary"></i></a>
                                         </div>
                                     </div>
                                     {% endfor %}

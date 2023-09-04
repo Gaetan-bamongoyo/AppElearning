@@ -1,0 +1,48 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>My Courses</h3>
+                        <p class="mb-2">Welcome to Edunet My Courses page</p>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs">
+                        <a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a href="#">My
+                            Courses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="row">
+                    {% for i in module %}
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <iframe src="{{i.video}}" height="300px" ></iframe>
+                            <div class="card-body courses-details">
+                                <a href="course-details.html">
+                                    <h5>{{i.titre}}</h5>
+                                </a>
+                                <p>{{i.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

@@ -98,6 +98,8 @@
                                     class="ri-grid-fill"></i></span><span class="nav-text">Dashboard</span></a></li>
                     <li class="undefined"><a href=""><span><i class="ri-stack-fill"></i></span><span
                                 class="nav-text">Courses</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:mescours'%}"><span><i
+                                    class="ri-wallet-3-fill"></i></span><span class="nav-text">Mes cours</span></a></li>
 
                     {% else %}
                     {% if user.is_superuser == 1 %}
@@ -105,16 +107,16 @@
                                     class="ri-grid-fill"></i></span><span class="nav-text">Dashboard</span></a></li>
                     <li class="undefined"><a href=""><span><i class="ri-stack-fill"></i></span><span
                                 class="nav-text">Courses</span></a></li>
-                    <li class="undefined"><a href=""><span><i class="ri-wallet-3-fill"></i></span><span
-                                class="nav-text">Mes cours</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:mescours'%}"><span><i
+                                    class="ri-wallet-3-fill"></i></span><span class="nav-text">Mes cours</span></a></li>
 
                     {% else %}
                     <li class="undefined"><a href="{% url 'learning:home' %}"><span><i
                                     class="ri-grid-line"></i></span><span class="nav-text">Dashboard</span></a></li>
-                    <li class="undefined"><a href="{% url 'learning:course' %}"><span><i class="ri-stack-line"></i></span><span
-                                class="nav-text">Courses</span></a></li>
-                    <li class="undefined"><a href=""><span><i class="ri-wallet-3-line"></i></span><span
-                                class="nav-text">Mes cours</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:course' %}"><span><i
+                                    class="ri-stack-line"></i></span><span class="nav-text">Courses</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:mescours'%}"><span><i
+                                    class="ri-wallet-3-fill"></i></span><span class="nav-text">Mes cours</span></a></li>
                     <li class="undefined"><a href="{% url 'learning:setting' %}"><span><i
                                     class="ri-settings-3-line"></i></span><span class="nav-text">Setting</span></a></li>
                     {% endif %}
@@ -137,6 +139,14 @@
     <script src="{% static 'assets/vendor/jqvmap/js/jquery.vmap.world.js'%}"></script>
     <script src="{% static 'assets/js/plugins/jqvmap-init.js'%}"></script>
     <script src="{% static 'assets/js/scripts.js'%}"></script>
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
 
 
 </body>

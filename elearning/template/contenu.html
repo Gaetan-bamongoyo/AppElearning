@@ -1,0 +1,107 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        {% for i in module %}
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>Contenu du {{i.module}}</h3>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs"><a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a
+                            href="#">Contenu</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center align-items-center py-20">
+                            <div class="col-xl-8">
+                                <form class="form-valid" action="/createcontenu/{{id}}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group row mb-20">
+                                        <label class="form-label col-lg-3"> Titre
+                                        </label>
+                                        <div class="col-lg-9">
+                                            <input name="titre" type="text" class="form-control col-lg-9">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-20">
+                                        <label class="form-label col-lg-3">Lien video
+                                        </label>
+                                        <div class="col-lg-9">
+                                            <input name="video" type="text" class="form-control col-lg-9">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-20"><label class="form-label col-lg-3">Course
+                                        Niveau</label>
+                                    <div class="col-lg-9"><select name="niveau" id="courseCategory"
+                                            class="form-control col-lg-9">
+                                            <option value>Selectionner le niveau</option>
+                                            <option value="Elementaire">Elementaire</option>
+                                            <option value="Moyen">Moyen</option>
+                                            <option value="Avance">Avance</option>
+                                        </select></div>
+                                    <div class="row mt-16">
+                                        <div class="col-lg-3"></div>
+                                        <div class="col-lg-9"><button class="me-10 btn btn-primary"
+                                                type="submit">Enregistre</button>
+                                            <a href="{% url 'learning:module' %}" class="btn btn-danger">Annuler</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Liste </h4>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="rtable rtable--5cols rtable--collapse">
+                        <div class="rtable-row rtable-row--head bg-transparent">
+                            <div class="rtable-cell topic-cell column-heading text-dark"><strong>
+                                    Titre</strong></div>
+                            <div class="rtable-cell earning-cell column-heading text-dark"><strong>
+                                    Niveau</strong></div>
+                                    <div class="rtable-cell category-cell column-heading text-dark"><strong>
+                                        Action</strong></div>
+                        </div>
+                        {% for i in contenu %}
+                        <div class="rtable-row">
+                            <div class="rtable-cell topic-cell">
+                                <div class="rtable-cell--content title-content d-flex align-items-center">
+                                    <img class="topic-cell-img" src="{% static 'assets/images/courses/bootstrap.png'%}"
+                                        alt="" width="50"><span class="topic-cell-span">{{i.titre}}</span>
+                                </div>
+                            </div>
+                            <div class="rtable-cell category-cell">
+                                <div class="rtable-cell--heading">Niveau</div>
+                                <div class="rtable-cell--content date-content">{{i.niveau}}
+                                </div>
+                            </div>
+                            <div class="rtable-cell rtable-cell--foot earning-cell">
+                                <div class="rtable-cell--heading">Action</div>
+                                <a class="icon mx-16 my-16 py-8 px-8 rounded-circle bg-primary-lighten"
+                                                href=""><i class="ri-check-line fs-18 text-primary"></i></a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+{% endblock %}

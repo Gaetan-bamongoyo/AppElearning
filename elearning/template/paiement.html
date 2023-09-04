@@ -1,0 +1,80 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>Illistration</h3>
+                        <p class="mb-2">Ceci est une illistration de paiement de formation via une carte visa</p>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs"><a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a
+                            href="#">My Card</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="cc-card">
+                    <div class="cc-card-info">
+                        <div>
+                            <p>Balance</p>
+                            <h3>$3356</h3>
+                        </div><img src="{% static 'assets/images/cc/visa.png'%}" alt="">
+                    </div>
+                    <div class="cc-card-number">
+                        <h3><span>4785 9856 2563 1254</span></h3>
+                    </div>
+                    <div class="cc-card-details">
+                        <div>
+                            <h5>CARD HOLDER</h5>
+                            <p>Saiful Islam</p>
+                        </div>
+                        <div>
+                            <h5>VALID TILL</h5>
+                            <p>11/21</p>
+                        </div>
+                        <div><img src="{% static 'assets/images/cc/sim.png'%}" alt=""></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Money transfert de $ {{montant}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/createpaiement/{{id}}" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-6"><label for="inputState" class="form-label">Date
+                                        expiration</label><input type="text" class="form-control" placeholder="01/10">
+                                </div>
+                                <div class="col-6 mb-16"><label for="inputState" class="form-label">Security
+                                        code</label>
+                                    <input type="text" class="form-control" placeholder="XXXX">
+                                </div>
+                            </div>
+                            <div class="col-12"><label for="inputState" class="form-label">Numero card</label><input
+                                    type="text" class="form-control" placeholder="8967 8877 6677 8885"></div>
+                            <div class="col-12"><label for="inputState" class="form-label">Nom</label><input type="text"
+                                    class="form-control" placeholder="Bernard Benie"></div>
+                            <div class="row mt-16">
+                                <div class="col-lg-3"></div>
+                                <div class="col-lg-9"><button class="me-10 btn btn-primary"
+                                        type="submit">Payer</button>
+                                    <a href="{% url 'learning:course' %}" class="btn btn-danger">Annuler</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
