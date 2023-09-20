@@ -68,13 +68,13 @@
                                             <div class="user"><span class="thumb"><img
                                                         src="{% static 'assets/images/avatar/1.png'%}" alt=""></span>
                                                 <div>
-                                                    <h5>Fiaz Abdullah</h5><span>codeefly@gmail.com</span>
+                                                    <h5>{{user.username}}</h5><span>{{user.email}}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <a class="dropdown-item ps-20 pe-20 pt-10 pb-10 d-flex align-items-center border-top  undefined"
-                                            href="profile.html"><span class="fs-18 text-primary me-10"><i
-                                                    class="ri-user-line"></i></span>Profile</a>
+                                        <!-- <a class="dropdown-item ps-20 pe-20 pt-10 pb-10 d-flex align-items-center border-top  text-danger"
+                                            href="{% url 'learning:profil' %}"><span class="fs-18 text-primary me-10"><i
+                                                    class="ri-user-line"></i></span>Profil</a> -->
                                         <a class="dropdown-item ps-20 pe-20 pt-10 pb-10 d-flex align-items-center border-top  text-danger"
                                             href="{% url 'learning:logout' %}"><span class="fs-18 text-primary me-10"><i
                                                     class="ri-logout-circle-line"></i></span>Logout</a>
@@ -95,21 +95,25 @@
                 <ul>
                     {% if user.is_staff == 1 %}
                     <li class="undefined"><a href="{% url 'learning:home' %}"><span><i
-                                    class="ri-grid-fill"></i></span><span class="nav-text">Dashboard</span></a></li>
-                    <li class="undefined"><a href=""><span><i class="ri-stack-fill"></i></span><span
-                                class="nav-text">Courses</span></a></li>
+                                    class="ri-grid-line"></i></span><span class="nav-text">Dashboard</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:course' %}"><span><i
+                                    class="ri-stack-line"></i></span><span class="nav-text">Courses</span></a></li>
                     <li class="undefined"><a href="{% url 'learning:mescours'%}"><span><i
                                     class="ri-wallet-3-fill"></i></span><span class="nav-text">Mes cours</span></a></li>
+                    <!-- <li class="undefined"><a href="{% url 'learning:profil'%}"><span><i
+                                    class="ri-user-line"></i></span><span class="nav-text">Profil</span></a></li> -->
 
                     {% else %}
                     {% if user.is_superuser == 1 %}
                     <li class="undefined"><a href="{% url 'learning:home' %}"><span><i
-                                    class="ri-grid-fill"></i></span><span class="nav-text">Dashboard</span></a></li>
-                    <li class="undefined"><a href=""><span><i class="ri-stack-fill"></i></span><span
-                                class="nav-text">Courses</span></a></li>
+                                    class="ri-grid-line"></i></span><span class="nav-text">Dashboard</span></a></li>
+                    <li class="undefined"><a href="{% url 'learning:course' %}"><span><i
+                                    class="ri-stack-line"></i></span><span class="nav-text">Courses</span></a></li>
                     <li class="undefined"><a href="{% url 'learning:mescours'%}"><span><i
                                     class="ri-wallet-3-fill"></i></span><span class="nav-text">Mes cours</span></a></li>
-
+                    <li class="undefined"><a href="{% url 'learning:listecourse'%}"><span><i
+                                    class="ri-video-line"></i></span><span class="nav-text">Mes examens</span></a></li>
+                                    
                     {% else %}
                     <li class="undefined"><a href="{% url 'learning:home' %}"><span><i
                                     class="ri-grid-line"></i></span><span class="nav-text">Dashboard</span></a></li>
@@ -117,8 +121,11 @@
                                     class="ri-stack-line"></i></span><span class="nav-text">Courses</span></a></li>
                     <li class="undefined"><a href="{% url 'learning:mescours'%}"><span><i
                                     class="ri-wallet-3-fill"></i></span><span class="nav-text">Mes cours</span></a></li>
+                                    <li class="undefined"><a href="{% url 'learning:listecourse'%}"><span><i
+                                        class="ri-video-line"></i></span><span class="nav-text">Mes examens</span></a></li>
                     <li class="undefined"><a href="{% url 'learning:setting' %}"><span><i
                                     class="ri-settings-3-line"></i></span><span class="nav-text">Setting</span></a></li>
+                    
                     {% endif %}
                     {% endif %}
                 </ul>

@@ -11,12 +11,6 @@
                         <p class="mb-2">Welcome to Edunet My Courses page</p>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <div class="breadcrumbs">
-                        <a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a href="#">My
-                            Courses</a>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row">
@@ -25,7 +19,7 @@
                     {% for i in module %}
                     <div class="col-lg-6">
                         <div class="card">
-                            <iframe src="{{i.video}}" height="300px" ></iframe>
+                            <iframe src="{{i.video}}" height="300px"></iframe>
                             <div class="card-body courses-details">
                                 <a href="course-details.html">
                                     <h5>{{i.titre}}</h5>
@@ -40,9 +34,43 @@
                     </div>
                 </div>
             </div>
+            {% if etat == 1 %}
+            {% else %}
+            <div class="col-xl-4">
+                <div class="right-sidebar">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card transparent">
+                                <div class="card-header">
+                                    <h4 class="card-title">Examen</h4>
+                                    <a class="d-flex align-items-center" href="create-group.html"><i
+                                            class="ri-arrow-right-line ms-10"></i></a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="g-discussion-inner row">
+                                        <div class="col-md-6 col-xl-12">
+                                            <div
+                                                class="bg-white py-12 px-12 rounded d-flex mb-20 justify-content-between align-items-center align-items-center shadow-sm">
+
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-1">Envoi une video pour votre examen</h6>
+                                                </div>
+                                                <a href="/examen/{{id}}">
+                                                    <h5 class="text-primary">+</h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
-    
+
 </div>
 
 {% endblock %}

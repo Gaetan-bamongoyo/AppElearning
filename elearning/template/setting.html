@@ -25,11 +25,11 @@
                     </li>
                     <li class=""><a href="{% url 'learning:module' %}"><i class="ri-arrow-right-s-line"></i>
                             Module</a></li>
-                    <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
-                            Affection</a>
-                    </li>
                     <li class=""><a href="{% url 'learning:categorie' %}"><i class="ri-arrow-right-s-line"></i>
                             Categorie</a>
+                    </li>
+                    <li class=""><a href="{% url 'learning:listevideo' %}"><i class="ri-arrow-right-s-line"></i>
+                            Examen</a>
                     </li>
                 </ul>
             </div>
@@ -45,6 +45,10 @@
                                     method="POST">
                                     {% csrf_token %}
                                     <div class="info-group row">
+                                        <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label class="form-label">Nom
+                                                Nom et Prenom</label>
+                                            <input name="identite" type="text" class="form-control">
+                                        </div>
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 mb-16"><label class="form-label">Nom
                                                 d'utilisateur</label>
                                             <input name="username" type="text" class="form-control">

@@ -1,0 +1,145 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>Profile</h3>
+                        <p class="mb-2">Welcome to Edunet Profile page</p>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs"><a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a
+                            href="#">Profile</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                        <div class="card welcome-profile">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-10">
+                                    <img src="{{photo.url}}" alt="" class="me-16 rounded-circle" width="75">
+                                    <div>
+                                        {% for i in user %}
+                                        <h4 class="mb-2"></h4>
+                                        {% if i.is_staff == 1 %}
+                                        <p class="text-dark mb-1">Apprenant</p>
+                                        {% else %}
+                                        <p class="text-dark mb-1">Personnel</p>
+                                        
+                                        {% endif %}
+                                        <p class="mb-0">{{i.email}}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <ul>
+                                    <li><a href=""><span class="verified"><i class="ri-check-line"></i></span>Verify
+                                            account</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="app-link">
+                                    <h5>Get Verified On Our Mobile App</h5>
+                                    <p>Verifying your identity on our mobile app more secure, faster, and reliable.
+                                    </p><a href="#" class="btn btn-primary"><img src="{% static 'assets/images/android.svg'%}"
+                                            alt=""></a><br>
+                                    <div class="mt-16"></div><a href="#" class="btn btn-primary"><img
+                                            src="{% static 'assets/images/apple.svg'%}" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Information </h4>
+                            </div>
+                            <div class="card-body">
+                                <form class="row" method="POST" enctype="multipart/form-data"
+                                    action="{% url 'learning:personne'%}">
+                                    {% csrf_token %}
+                                    <div class="col-lg-6 col-md-6">
+                                        <input name="id" type="hidden" class="form-control" value="{{id}}">
+
+                                        <div class="user-info"><span>Username</span>
+                                            <input name="user" type="text" class="form-control" value="{{utilisateur}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="user-info"><span>Identite</span>
+                                            <input value="{{identite}}" name="identite" type="text"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="user-info"><span>Adresse domicile</span>
+                                            <input value="{{adresse}}" name="adresse" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="user-info"><span>Pays</span>
+                                            <input value="{{pays}}" name="pays" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="user-info"><span>Telephone</span>
+                                            <input value="{{phone}}" name="phone" type="text" class="form-control"
+                                                placeholder="Numero de telephone">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="user-info"><span>Photo</span>
+                                            <input value="{{photo}}" name="photo" type="file" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="mt-16"><button type="submit"
+                                            class="btn btn-primary mr-2">Modifier</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card transparent">
+                            <div class="card-header">
+                                <h4 class="card-title">Mes cours</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-discussion-inner">
+                                    {% for i in cours %}
+                                    <div class="col-lg-6 col-xl-12">
+                                        <div
+                                            class="bg-white py-12 px-12 rounded d-flex mb-20 justify-content-between align-items-center align-items-center shadow-sm">
+                                            <img src="{% static 'assets/images/courses/18.jpg'%}" width="85" alt=""
+                                                class="rounded me-15">
+                                            <div class="flex-grow-1">
+                                                <h5 class="mb-5 fs-16">{{i.module}}</h5>
+                                                <p class="mb-0 fs-14">Development</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

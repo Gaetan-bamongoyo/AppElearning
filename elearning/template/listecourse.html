@@ -1,0 +1,52 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>My Courses</h3>
+                        <p class="mb-2">Welcome to Edunet My Courses page</p>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs">
+                        <a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a href="#">My
+                            Courses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="row">
+                    {% for i in affectation %}
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <img src="{{i.photo.url}}" class="img-fluid card-img-top" alt="" />
+                            <div class="card-body courses-details">
+                                <a href="course-details.html">
+                                    <h5>{{i.modulename}}</h5>
+                                </a>
+                                <div class="courses-action">
+                                    <a class="btn btn-primary text-white" href="/contenu/{{i.module}}">Ajouter les contenus</a>
+                                    <a href="{% url 'learning:listevideo' %}"
+                                        class="btn btn-light text-dark btn btn-secondary">Les examens</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

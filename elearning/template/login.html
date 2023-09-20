@@ -37,7 +37,8 @@
                             <form action="{% url 'learning:signin'%}" method="POST">
                                 {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-12 mb-16"><label class="form-label">Username</label><input name="username"
+                                    
+                                    <div class="col-12 mb-16"><label class="form-label">Nom utilisateur</label><input name="username"
                                             type="text" class="form-control"></div>
                                     <div class="col-12 mb-16"><label class="form-label">Mot de passe</label><input
                                             name="password" type="password" class="form-control"></div>

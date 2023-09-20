@@ -19,6 +19,46 @@ def RegisterPage(request):
 def Dashboard(request):
     template = 'dashboard.html'
     return render(request, template)
+
+def CertificatPage(request, pk):
+    if request.user.is_authenticated:
+        user_name = request.user.username
+        personne = Personne.objects.get(user=user_name)
+        inscription = Inscription.objects.get(IdInscription=pk)
+        module = Module.objects.get(IdModule=inscription.codemodule)
+        categorie = Categorie.objects.get(IdCategorie=module.categorie)
+        user_name = Affectation.objects.get(module=inscription.codemodule)
+        user_id = User.objects.get(id=user_name.personne)
+        formateur = Personne.objects.get(user=user_id.username)
+        context = {
+            'identite': personne.identite,
+            'module': module.module,
+            'categorie': categorie.categorie,
+            'formateur': formateur.identite
+        }
+        template = 'certificat.html'
+        return render(request, template, context)
+
+def ProfilPage(request):
+    if request.user.is_authenticated:
+        user_name = request.user.id
+        user = User.objects.filter(id=user_name)
+        cours = Inscription.objects.filter(user=user_name)
+        utilisateur = User.objects.get(id=user_name)
+        personne = Personne.objects.get(user=utilisateur.username)
+        context = {
+            'user':user,
+            'cours':cours,
+            'utilisateur': utilisateur.username,
+            'photo': personne.photo,
+            'identite': personne.identite,
+            'adresse': personne.adresse,
+            'phone': personne.telephone,
+            'pays': personne.pays,
+            'id':personne.IdPersonne
+        }
+        template = 'profil.html'
+        return render(request, template, context)
 # 
 # creation de l'utilisateur
 def CreateUser(request):
@@ -27,6 +67,7 @@ def CreateUser(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        identite = request.POST.get('identite')
         confirm_password = request.POST.get('confirm_password')
         
         if password==confirm_password:
@@ -40,8 +81,14 @@ def CreateUser(request):
                         email=email,
                         is_staff=1
                 )
+                personne = Personne(
+                    user=username,
+                    photo='user_photo/10.jpg',
+                    identite=identite
+                )
                 user.set_password(password)
                 user.save()
+                personne.save()
                 return redirect('learning:login')
                     
     else:
@@ -164,6 +211,7 @@ def CreateUserAdmin(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        identite = request.POST.get('identite')
         isstaff = request.POST.get('isstaff')
         
         if User.objects.filter(username=username).exists():
@@ -177,6 +225,12 @@ def CreateUserAdmin(request):
                         is_staff=0,
                         is_superuser=isstaff
                 )
+            personne = Personne(
+                    user=username,
+                    photo='user_photo/10.jpg',
+                    identite=identite
+            )
+            personne.save()
             user.set_password(password)
             user.save()
             return redirect('learning:setting')
@@ -241,9 +295,12 @@ def InscriptionPage(request, pk):
     return render(request, template, context) 
 
 def MesCoursLirePage(request, pk):
-    module = Contenus.objects.filter(module=pk)
+    etat = Inscription.objects.get(IdInscription=pk)
+    module = Contenus.objects.filter(module=etat.codemodule)
     context = {
         'module': module,
+        'etat': etat.etatcours,
+        'id': pk
     }
     template = 'contenudetail.html'
     return render(request, template, context)
@@ -263,7 +320,7 @@ def CreateInscription(request, pk):
                 user=user_name
             )
             form.save()
-            return redirect('learning:module')
+            return redirect('learning:mescours')
 
 def PaiementPage(request, pk):
     module = Inscription.objects.get(IdInscription=pk)
@@ -303,6 +360,147 @@ def MesCoursPage(request):
             'module': module,
         }
         template = 'mescours.html'
+        return render(request, template, context)
+
+def CreatePersonne(request):
+    if request.method=='POST':
+        user = request.POST.get('user')
+        identite = request.POST.get('identite')
+        adresse = request.POST.get('adresse')
+        pays = request.POST.get('pays')
+        phone = request.POST.get('phone')
+        ids = request.POST.get('id')
+        photo = request.FILES.get('photo')
+        form = Personne(
+            adresse=adresse,
+            identite=identite,
+            pays=pays,
+            telephone=phone,
+            user=user,
+            photo= photo,
+            IdPersonne=ids
+        )
+        form.save()
+        return redirect('learning:profil')
+
+# 
+# 
+# 
+#  operation Affectation
+# 
+# 
+#
+
+def ListeCoursePage(request):
+    if request.user.is_authenticated:
+        user_name = request.user.id
+        affectation = Affectation.objects.filter(personne=user_name)
+        context = {
+                'affectation': affectation,
+            }
+        template = 'listecourse.html'
         return render(request, template, context) 
+ 
+def AffectationPage(request, pk):
+    module = Module.objects.get(IdModule=pk)
+    user = User.objects.filter(is_staff=0)
+    context = {
+            'id': module.IdModule,
+            'user': user
+        }
+    template = 'affectation.html'
+    return render(request, template, context) 
+
+def CreateAffectation(request, pk):
+    if request.method=='POST':
+        user = request.POST.get('user')
+        module = Module.objects.get(IdModule=pk)
+        form = Affectation(
+            module=pk,
+            personne=user,
+            modulename=module.module,
+            photo=module.photo
+        )
+        module = Module(
+            IdModule=pk,
+            module=module.module,
+            addDayDateAjout=module.addDayDateAjout,
+            categorie=module.categorie,
+            affecte=0,
+            description=module.description,
+            detailcours=module.detailcours,
+            montant=module.montant,
+            photo=module.photo
+        )
+        module.save()
+        form.save()
+        return redirect('learning:module')
+# 
+# 
+# 
+# configuration video (CRUD)
+# 
+# 
+# 
+def VideoLien(request, pk):
+    context = {
+            'id': pk
+        }
+    template = 'examen.html'
+    return render(request, template, context) 
+
+def VideoListe(request):
+    if request.user.is_authenticated:
+        user_name = request.user.id
+        video = Video.objects.filter(formateur=user_name)
+        context = {
+                'video': video
+            }
+        template = 'validevideo.html'
+        return render(request, template, context) 
+
+def VideoLireValide(request, pk):
+    video = Video.objects.get(IdVideo=pk)
+    inscription = Inscription.objects.get(IdInscription=video.inscription)
+    context = {
+            'video': video.video,
+            'id': video.inscription,
+            'etat': inscription.etatcours
+        }
+    template = 'lirevideo.html'
+    return render(request, template, context)
+
+def CreateVideo(request, pk):
+    if request.method=='POST':
+        video = request.FILES.get('video')
+        inscription = Inscription.objects.get(IdInscription=pk)
+        affectation = Affectation.objects.get(module=inscription.codemodule)
+        # user = Personne.objects.get(user=inscription.user)
+        form = Video(
+            inscription=pk,
+            module=inscription.codemodule,
+            video= video,
+            identite=video,
+            formateur=affectation.formateur
+        )
+        form.save()
+        return redirect('learning:mescours')
+    
+def CreateValideVideo(request, pk):
+    inscription = Inscription.objects.get(IdInscription=pk)
+    form = Inscription(
+            IdInscription=pk,
+            module=inscription.module,
+            codemodule=inscription.codemodule,
+            etatcours=1,
+            etatpaiement=1,
+            montant=inscription.montant,
+            niveau=inscription.niveau,
+            user=inscription.user,
+        )
+    form.save()
+    return redirect('learning:listevideo')
+
+
 
 

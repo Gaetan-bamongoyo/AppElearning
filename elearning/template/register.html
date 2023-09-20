@@ -38,6 +38,8 @@
                             <form action="{% url 'learning:create' %}" method="POST">
                                 {% csrf_token %}
                                 <div class="row">
+                                    <div class="col-12 mb-16"><label class="form-label">Nom et Prenom</label><input name="identite"
+                                        type="text" class="form-control"></div>
                                     <div class="col-12 mb-16"><label class="form-label">Nom utilisateur</label><input
                                             name="username" type="text" class="form-control"></div>
                                     <div class="col-12 mb-16"><label class="form-label">Email</label><input name="email"

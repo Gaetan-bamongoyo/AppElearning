@@ -13,6 +13,9 @@ urlpatterns = [
     # 
     path('create', CreateUser, name='create'),
     path('signin', loginUser, name='signin'),
+    path('profil', ProfilPage, name='profil'),
+    path('personne', CreatePersonne, name='personne'),
+    path('certificat/<int:pk>', CertificatPage, name='certificat'),
     
     # 
     # 
@@ -31,9 +34,22 @@ urlpatterns = [
     path('coursedetail/<int:pk>', CoursDetailPage, name='coursedetail'),
     path('getcours/<int:pk>', UniqueCoursPage, name='getcours'),
     path('contenudetail/<int:pk>', MesCoursLirePage, name='contenudetail'),
+    path('affectation/<int:pk>', AffectationPage, name='affectation'),
+    path('createaffectation/<int:pk>', CreateAffectation, name='createaffectation'),
     path('mescours', MesCoursPage, name='mescours'),
+    path('listecourse', ListeCoursePage, name='listecourse'),
     path('paiement/<int:pk>', PaiementPage, name='paiement'),
     path('createpaiement/<int:pk>', CreatePaiement, name='createpaiement'),
+    
+    # 
+    # 
+    # 
+    # 
+    path('examen/<int:pk>', VideoLien, name='examen'),
+    path('addvideo/<int:pk>', CreateVideo, name='addvideo'),
+    path('listevideo', VideoListe, name='listevideo'),
+    path('valide/<int:pk>', CreateValideVideo, name='valide'),
+    path('lirevideo/<int:pk>', VideoLireValide, name='lirevideo'),
     # 
     # 
     # 

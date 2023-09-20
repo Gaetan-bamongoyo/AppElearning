@@ -25,12 +25,11 @@
                     </li>
                     <li class=""><a href="{% url 'learning:module' %}"><i class="ri-arrow-right-s-line"></i>
                             Module</a></li>
-                    <li class=""><a href=""><i class="ri-arrow-right-s-line"></i>
-                            Affection</a>
-                    </li>
                     <li class=""><a href="{% url 'learning:categorie' %}"><i class="ri-arrow-right-s-line"></i>
                             Categorie</a>
                     </li>
+                    <li class=""><a href="{% url 'learning:listevideo' %}"><i class="ri-arrow-right-s-line"></i>
+                        Examen</a> 
                 </ul>
             </div>
             <div class="col-md-9">
@@ -117,8 +116,13 @@
                                         </div>
                                         <div class="rtable-cell rtable-cell--foot earning-cell">
                                             <div class="rtable-cell--heading">Action</div>
-                                            <a class="icon mx-16 my-16 py-8 px-8 rounded-circle bg-primary-lighten"
-                                                href="/contenu/{{i.IdModule}}"><i class="ri-check-line fs-18 text-primary"></i></a>
+                                            {% if i.affecte == 1 %}
+                                            <a href="/affectation/{{i.IdModule}}" style="color: red;">non affecte formateur</a>
+                                            {% else %}
+                                            <a href="#">Affecte</a>
+                                            {% endif %}
+                                            <a href="/contenu/{{i.IdModule}}">Contenu</a>
+
                                         </div>
                                     </div>
                                     {% endfor %}

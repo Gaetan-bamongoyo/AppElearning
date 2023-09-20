@@ -1,0 +1,38 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header border-bottom pb-15">
+                        <h4 class="card-title">Python Bootcamp from Zero to Hero</h4>
+                    </div>
+                    <div class="card-body course-details">
+                        <!-- <img src="{{video.url}}" class="img-fluid rounded mb-20" alt="" /> -->
+                        <video src="{{video.url}}" class="img-fluid rounded mb-20" autoplay="true"></video>
+                    </div>
+
+                </div>
+            </div>
+            {% if etat == 1%}
+            {% else %}
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Valide la video</h4>
+                    </div>
+                    <div class="card-body course-details">
+                        <ul class="course-summary">
+                            <li class="d-flex justify-content-between align-items-center">
+                                <a href="/valide/{{id}}" class="btn btn-primary">Valide</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

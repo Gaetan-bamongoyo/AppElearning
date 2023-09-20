@@ -1,0 +1,52 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>Envoi de video</h3>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="breadcrumbs"><a href="#">Home </a><span><i class="ri-arrow-right-s-line"></i></span><a
+                            href="#">Contenu</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center align-items-center py-20">
+                            <div class="col-xl-8">
+                                <form class="form-valid" action="/addvideo/{{id}}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group row mb-20">
+                                        <label class="form-label col-lg-3">La video
+                                        </label>
+                                        <div class="col-lg-9">
+                                            <input name="video" type="file" class="form-control col-lg-9">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-16">
+                                        <div class="col-lg-3"></div>
+                                        <div class="col-lg-9"><button class="me-10 btn btn-primary"
+                                                type="submit">Enregistre</button>
+                                            <a href="" class="btn btn-danger">Annuler</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

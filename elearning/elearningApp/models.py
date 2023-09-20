@@ -9,6 +9,7 @@ class Module(models.Model):
     description = models.TextField()
     detailcours = models.TextField(null=True)
     categorie = models.IntegerField(null=True)
+    affecte = models.BooleanField(default=1)
     photo = models.ImageField(upload_to='module_photo')
     addDayDateAjout = models.DateField(auto_now_add=True)
 
@@ -35,4 +36,31 @@ class Inscription(models.Model):
     etatpaiement = models.BooleanField(default=0)
     etatcours = models.IntegerField()
     user = models.IntegerField()
+
+class Personne(models.Model):
+    IdPersonne = models.AutoField(primary_key=True)
+    user = models.TextField()
+    identite = models.TextField(null=True)
+    adresse = models.TextField(null=True)
+    telephone = models.IntegerField(null=True)
+    pays = models.CharField(max_length=50, null=True)
+    photo = models.ImageField(upload_to='user_photo')
+
+class Video(models.Model):
+    IdVideo = models.AutoField(primary_key=True)
+    video = models.FileField(upload_to='video_cours', max_length=100)
+    inscription = models.IntegerField()
+    identite = models.CharField(max_length=50)
+    module = models.CharField(max_length=50)
+    formateur = models.IntegerField(default=2)
+
+
+class Affectation(models.Model):
+    IdAffectation = models.AutoField(primary_key=True)
+    personne = models.IntegerField()
+    module = models.IntegerField()
+    addDayAjout = models.DateField(auto_now_add=True)
+    photo = models.ImageField(upload_to='module_photo', null=True)
+    modulename = models.CharField(max_length=50, null=True)
+    
     

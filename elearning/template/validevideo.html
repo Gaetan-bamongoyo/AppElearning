@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="container">
+        <div class="page-title">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <div class="page-title-content">
+                        <h3>My Courses</h3>
+                        <p class="mb-2">Welcome to Edunet My Courses page</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="row">
+                    {% for i in video %}
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <video src="{{i.video.url}}" height="300px" width="100%"></video>
+                            <div class="card-body courses-details">
+                                <div class="courses-action">
+                                    <a class="btn btn-primary text-white" href="lirevideo/{{i.IdVideo}}">Lire</a>
+                                    <a href="#"
+                                        class="btn btn-light text-dark btn btn-secondary">Supprimer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

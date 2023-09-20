@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'assets/style.css'%}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="body">
+            <img src="{% static 'assets/1.png'%}" alt="" srcset="">
+            <h2>CERTIFICAT DE PARTICIPATION</h2>
+            <h3>Ce certificat est remis à</h3>
+            <h4>{{identite}}</h4>
+            <p>Pour avoir participé à la formation du {{module}} <br> dans la categorie {{categorie}}</p>
+        </div>
+        <div class="footer">
+            <div class="signe1">
+                <div class="bar"></div>
+                <h5>{{formateur}}</h5>
+                <h6>Formateur</h6>
+            </div>
+            <div class="signe1">
+                <div class="bar"></div>
+                <h5>GAETAN ABIO</h5>
+                <h6>Directeur</h6>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
