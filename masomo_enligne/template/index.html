@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bonjour</h1>
+
+    <div>
+        <form action="{% url 'app:createpersonne' %}" method="post">
+            {% csrf_token %}
+            <label for="Nom personne"></label>
+            <input type="text" name="nom" id="">
+
+            <label for="Postnom personne"></label>
+            <input type="text" name="postnom" id="">
+
+            <button type="submit">Enregistrer</button>
+        </form>
+    </div>
+    <h1>Affichage</h1>
+    <div>
+        <table>
+            <thead>
+                <th>Nom</th>
+                <th>Postnom</th>
+            </thead>
+            <tbody>
+                {% for i in personne %}
+                <tr>
+                <td>{{i.nom}}</td>
+                <td>{{i.postnom}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
